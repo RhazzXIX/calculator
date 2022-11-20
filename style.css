@@ -1,0 +1,109 @@
+body {
+    height: 100vh;
+    width: auto;
+    display: flex;
+    flex-direction: column;
+    background-image: url("./images/wood.jpg");
+}
+
+#header {
+    color: white;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+#content{
+    display: flex;
+    justify-content: center;
+}
+
+#calcbody{
+    display: flex;
+    flex-direction: column;
+    border: 5px solid black;
+    width: 500px;
+    padding: 24px;
+    background-color:#a5fddf;
+    border-radius: 18px;
+
+}
+
+#display {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    flex: 1;
+    border: 5px solid black;
+    margin-bottom: 36px;
+    margin-top: 20px;
+    border-radius: 10px;
+}
+
+#screen1 {
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-end;
+    height: 68px;
+    width: 490px;
+    flex: 1 1 auto;
+    font-size: 42px;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: rgb(199, 196, 196);
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+}
+
+#screen2{
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: flex-end;
+    justify-self: center;
+    height: 96px;
+    width: 490px;
+    flex: 1 1 auto;
+    font-size: 56px;
+    padding: 10px;
+    box-sizing: border-box;
+    background-color: rgb(221, 221, 221);
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+#keyPad {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+button.keys {
+    font-size: 50px;
+    text-align: center;
+    width: 90px;
+    height: 90px;
+    padding: 0px;
+    border-radius: 100px;
+    margin: 10px;
+    background-color: rgb(245, 245, 245);
+    
+}
+
+button#equals {
+    width: 215px;
+}
+
+button#back {
+    padding-bottom: 14px;
+}
+
+#footer {
+ display: flex;
+ justify-content: center;
+ color: white;
+ margin: 20px 0;
+}
+
+#github {
+    width: 14px;
+    margin-left: 8px;
+}
