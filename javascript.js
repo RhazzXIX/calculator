@@ -1,7 +1,7 @@
-//anchor the screen1 text content
+//anchor the screen display text content
 const screen = document.querySelector('#screen');
-screen.textContent = `12345678901234567`
 const alertE = document.querySelector(`#alertE`)
+const alertGT = document.querySelector(`#alertGT`);
 
 //anchor buttons
 const gTotal = document.querySelector('#gTotal');
@@ -28,125 +28,328 @@ const plus = document.querySelector(`#plus`);
 // array that will be displayed in the screen
 let digits1 = [];
 let digits2 = [];
+let grandTotal = null;
+let result = null;
 
-function showScreen() {
-    screen.textContent = `${digits1.join('')}`;
-    if(digits1.length == 16) {
-        alertE.textContent = 'E';
+//boolean variables to for calculator flow
+let nextDigit = false;
+let addition = false;
+let subtraction = false;
+let multiplication = false;
+let division = false;
+let gtAlert = false;
+let point = false;
+
+//function that shows the array in the screen
+function showDigits() {
+    if(nextDigit === false) {
+        if(digits1.length == 0) {
+            screen.textContent = 0;
+        } else {
+            screen.textContent = `${digits1.join('')}`;
+            if(digits1.length == 16) {
+                alertE.textContent = 'Max';
+            };
+        };
+    } else if (nextDigit === true) {
+        if(digits2.length == 0) {
+            screen.textContent = 0;
+        } else {
+            screen.textContent = `${digits2.join('')}`
+            if(digits2.length == 16) {
+                alertE.textContent = 'Max';
+            };
+        };
     };
 }
 
 //show button input at the display
 gTotal.addEventListener('click', (e) => {
-    screen.textContent = 'GT';
+    if(gtAlert === false) {alertGT.textContent = ' '};
+    screen.textContent = `${grandTotal}`;
+    gtAlert = false;
 });
 back.addEventListener('click', (e) => {
-    screen.textContent = 'back';
+    if(nextDigit === false) {
+        digits1.pop();
+    } else {
+        digits2.pop();
+    };
+    showDigits();
 });
 clearEntry.addEventListener('click', (e) => {
-    screen.textContent = 'CE';
+    screen.textContent = '0';
 });
 gClear.addEventListener('click', (e) => {
-    screen.textContent = 'clear';
+    screen.textContent = '0';
+    digits1.splice(0, 16);
+    digits2.splice(0, 16);
+    addition = false;
+    dividion = false;
+    subtraction = false;
+    multiplication = false;
+    e.stopPropagation();
 });
-seven.addEventListener('click', (e) => {
-    if(digits1.length < 16) {
-        digits1.push(7);
-    };
-    screen.textContent = 7;
-    showScreen();
+dot.addEventListener('click', (e) => {
+    if(nextDigit === false) {
+        if(digits1.length < 16) {
+            if(point === false) {
+                digits1.push('.');
+            }
+        };
+    } else if (nextDigit === true) {
+        if(digits2.length < 16) {
+            if(point === false) {
+                digits2.push('.');
+            }
+        };
+    }
+    point = true;
+    showDigits();
 });
-eight.addEventListener('click', (e) => {
-    screen.textContent = 8;
+zero.addEventListener('click', (e) => {
+    if(nextDigit === false) {
+        if(digits1.length < 16 && digits1.length > 0) {
+            digits1.push(0);
+        };
+    } else if (nextDigit === true) {
+        if(digits2.length < 16 && digits1.length > 0) {
+            digits2.push(0);
+        };
+    }
+    showDigits();
 });
-nine.addEventListener('click', (e) => {
-    screen.textContent = 9;
+one.addEventListener('click', (e) => {
+    if(nextDigit === false) {
+        if(digits1.length < 16) {
+            digits1.push(1);
+        };
+    } else if (nextDigit === true) {
+        if(digits2.length < 16) {
+            digits2.push(1);
+        };
+    }
+    showDigits();
 });
-divide.addEventListener('click', (e) => {
-    screen.textContent = 'divide';
+two.addEventListener('click', (e) => {
+    if(nextDigit === false) {
+        if(digits1.length < 16) {
+            digits1.push(2);
+        };
+    } else if (nextDigit === true) {
+        if(digits2.length < 16) {
+            digits2.push(2);
+        };
+    }
+    showDigits();
+});
+three.addEventListener('click', (e) => {
+    if(nextDigit === false) {
+        if(digits1.length < 16) {
+            digits1.push(3);
+        };
+    } else if (nextDigit === true) {
+        if(digits2.length < 16) {
+            digits2.push(3);
+        };
+    }
+    showDigits();
 });
 four.addEventListener('click', (e) => {
-    screen.textContent = 4;
+    if(nextDigit === false) {
+        if(digits1.length < 16) {
+            digits1.push(4);
+        };
+    } else if (nextDigit === true) {
+        if(digits2.length < 16) {
+            digits2.push(4);
+        };
+    }
+    showDigits();
 });
 five.addEventListener('click', (e) => {
-    screen.textContent = 5;
+    if(nextDigit === false) {
+        if(digits1.length < 16) {
+            digits1.push(5);
+        };
+    } else if (nextDigit === true) {
+        if(digits2.length < 16) {
+            digits2.push(5);
+        };
+    }
+    showDigits();
 })
 six.addEventListener('click', (e) => {
-    screen.textContent = 6;
+    if(nextDigit === false) {
+        if(digits1.length < 16) {
+            digits1.push(6);
+        };
+    } else if (nextDigit === true) {
+        if(digits2.length < 16) {
+            digits2.push(6);
+        };
+    }
+    showDigits();
+});
+seven.addEventListener('click', (e) => {
+    if(nextDigit === false) {
+        if(digits1.length < 16) {
+            digits1.push(7);
+        };
+    } else if (nextDigit === true) {
+        if(digits2.length < 16) {
+            digits2.push(7);
+        };
+    }
+    showDigits();
+});
+eight.addEventListener('click', (e) => {
+      if(nextDigit === false) {
+        if(digits1.length < 16) {
+            digits1.push(8);
+        };
+    } else if (nextDigit === true) {
+        if(digits2.length < 16) {
+            digits2.push(8);
+        };
+    }
+    showDigits();
+});
+nine.addEventListener('click', (e) => {
+    if(nextDigit === false) {
+        if(digits1.length < 16) {
+            digits1.push(9);
+        };
+    } else if (nextDigit === true) {
+        if(digits2.length < 16) {
+            digits2.push(9);
+        };
+    }
+    showDigits();
+});
+
+//do the operations when pressing the equals
+equals.addEventListener('click', (e) => {
+    alertGT.textContent = 'GT';
+    gtAlert = true;
+    if(addition === true) {
+        sum();
+        screen.textContent = `${result}`;
+        grandTotal = result;
+    };
+    if(division === true) {
+        quotient();
+        screen.textContent = `${result}`;
+        grandTotal = result;
+    };
+    addition = false;
+    nextDigit = false;
+    digits1.splice(0, 16);
+    digits2.splice(0, 16);
+});
+plus.addEventListener('click', (e) => {
+    showDigits();
+    nextDigit = true;
+    addition = true;
+    division = false;
+    point = false;
 });
 times.addEventListener('click', (e) => {
     screen.textContent = 'x';
-});
-one.addEventListener('click', (e) => {
-    screen.textContent = 1;
-});
-two.addEventListener('click', (e) => {
-    screen.textContent = 2;
-});
-three.addEventListener('click', (e) => {
-    screen.textContent = 3;
+    nextDigit = true;
+    addition = true;
+    division = false;
+    point = false;
 });
 minus.addEventListener('click', (e) => {
     screen.textContent = '-';
+    nextDigit = true;
+    addition = true;
+    division = false;
+    point = false;
 });
-zero.addEventListener('click', (e) => {
-    screen.textContent = 0;
+divide.addEventListener('click', (e) => {
+    showDigits();
+    nextDigit = true;
+    division = true;
+    addition = false;
 });
-dot.addEventListener('click', (e) => {
-    screen.textContent = '.';
-});
-equals.addEventListener('click', (e) => {
-    screen.textContent = '=';
-});
-plus.addEventListener('click', (e) => {
-    screen.textContent = `+`;
-});
-
 
 //flash the screen when pressing the operation signs
 divide.addEventListener('mousedown', (e) => {
     screen.style.color = 'rgb(221, 221, 221)';
-    e.stopPropagation;
+    e.stopPropagation();
 });
 divide.addEventListener('mouseup', (e) => {
     screen.style.color = 'black';
-    e.stopPropagation;
+    e.stopPropagation();
 });
 times.addEventListener('mousedown', (e) => {
     screen.style.color = 'rgb(221, 221, 221)';
-    e.stopPropagation;
+    e.stopPropagation();
 });
 times.addEventListener('mouseup', (e) => {
     screen.style.color = 'black';
-    e.stopPropagation;
+    e.stopPropagation();
 });
 minus.addEventListener('mousedown', (e) => {
     screen.style.color = 'rgb(221, 221, 221)';
-    e.stopPropagation;
+    e.stopPropagation();
 });
 minus.addEventListener('mouseup', (e) => {
     screen.style.color = 'black';
-    e.stopPropagation;
+    e.stopPropagation();
 });
 plus.addEventListener('mousedown', (e) => {
     screen.style.color = 'rgb(221, 221, 221)';
-    e.stopPropagation;
+    e.stopPropagation();
 });
 plus.addEventListener('mouseup', (e) => {
     screen.style.color = 'black';
-    e.stopPropagation;
+    e.stopPropagation();
 });
 equals.addEventListener('mousedown', (e) => {
     screen.style.color = 'rgb(221, 221, 221)';
-    e.stopPropagation;
+    e.stopPropagation();
 });
 equals.addEventListener('mouseup', (e) => {
     screen.style.color = 'black';
-    e.stopPropagation;
+    e.stopPropagation();
+});
+gTotal.addEventListener('mousedown', (e) => {
+    screen.style.color = 'rgb(221, 221, 221)';
+    e.stopPropagation();
+});
+gTotal.addEventListener('mouseup', (e) => {
+    screen.style.color = 'black';
+    e.stopPropagation();
 });
 
+//function to add the digits
+function sum() {
+    let numA = digits1.join(``);
+    let numB = digits2.join(``);
+    return result = Number(numA) + Number(numB);
+}
 
-//do the operations when pressing the equals
+//function to divide numbers
+function quotient () {
+    let quotient;
+    let numA = digits1.join(``);
+    let numB = digits2.join(``);
+    quotient = Number(numA) / Number(numB);
+    if(quotient.toString().length > 16) {
+        quotient = quotient.toString().slice(0,16);
+        result = Number(quotient);
+    } else {
+        result = quotient;
+    }
+    
+  
+}
+
+
+
 
 
 
@@ -155,3 +358,13 @@ equals.addEventListener('mouseup', (e) => {
 
 
 //cancel current operation when pressing CE and return the latest result
+
+
+// test keydown##########
+// const body = document.querySelector(`body`);
+// body.addEventListener('keydown', (e) => {
+//     equals.classList.toggle(`active`);
+// });
+// body.addEventListener('keyup', (e) => {
+//     equals.classList.toggle(`active`);
+// });
