@@ -79,10 +79,28 @@ back.addEventListener('click', (e) => {
     showDigits();
 });
 sign.addEventListener('click', (e) => {
+    toggleSign();
     showDigits();
 
 });
+//function for checking for number sign
+function toggleSign() {
+    if(nextDigit === false) {
+        if(digits1[0] !== '-') {
+            digits1.unshift('-');
+        } else if (digits1[0] === '-') {
+            digits1.shift('-');
+        }
+    } else {
+        if(digits2[0] !== '-') {
+            digits2.unshift('-');
+        } else if (digits1[0] === '-') {
+            digits2.shift('-');
+        }
+    };
+}
 gClear.addEventListener('click', (e) => {
+    result = 0;
     screen.textContent = 0;
     alertGT.textContent = '';
     alertE.textContent = '';
