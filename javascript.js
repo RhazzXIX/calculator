@@ -11,7 +11,7 @@ const gClear = document.querySelector('#gClear');
 const seven = document.querySelector('#seven');
 const eight = document.querySelector('#eight');
 const nine = document.querySelector('#nine');
-const divide = document.querySelector('#divide');
+const division = document.querySelector('#divide');
 const four = document.querySelector('#four');
 const five = document.querySelector(`#five`);
 const six = document.querySelector(`#six`);
@@ -36,7 +36,7 @@ let nextDigit = false;
 let addition = false;
 let subtraction = false;
 let multiplication = false;
-let division = false;
+let quotient = false;
 let gtAlert = false;
 let point = false;
 
@@ -233,11 +233,11 @@ equals.addEventListener('click', (e) => {
     alertGT.textContent = 'GT';
     gtAlert = true;
     if(addition === true) {
-        sum();
+        add();
         screen.textContent = `${result}`;
         grandTotal = result;
     };
-    if(division === true) {
+    if(quotient === true) {
         quotient();
         screen.textContent = `${result}`;
         grandTotal = result;
@@ -251,36 +251,36 @@ plus.addEventListener('click', (e) => {
     showDigits();
     nextDigit = true;
     addition = true;
-    division = false;
+    quotient = false;
     point = false;
 });
 times.addEventListener('click', (e) => {
     screen.textContent = 'x';
     nextDigit = true;
-    addition = true;
-    division = false;
+    addition = false;
+    quotient = false;
     point = false;
 });
 minus.addEventListener('click', (e) => {
     screen.textContent = '-';
     nextDigit = true;
-    addition = true;
-    division = false;
+    addition = false;
+    quotient = false;
     point = false;
 });
-divide.addEventListener('click', (e) => {
+division.addEventListener('click', (e) => {
     showDigits();
     nextDigit = true;
-    division = true;
+    quotient = true;
     addition = false;
 });
 
 //flash the screen when pressing the operation signs
-divide.addEventListener('mousedown', (e) => {
+division.addEventListener('mousedown', (e) => {
     screen.style.color = 'rgb(221, 221, 221)';
     e.stopPropagation();
 });
-divide.addEventListener('mouseup', (e) => {
+division.addEventListener('mouseup', (e) => {
     screen.style.color = 'black';
     e.stopPropagation();
 });
@@ -326,14 +326,36 @@ gTotal.addEventListener('mouseup', (e) => {
 });
 
 //function to add the digits
-function sum() {
+function add() {
     let numA = digits1.join(``);
     let numB = digits2.join(``);
-    return result = Number(numA) + Number(numB);
+    result = Number(numA) + Number(numB);
+}
+
+//function to subtract
+
+function subtract() {
+    let numA = digits1.join(``);
+    let numB = digits2.join(``);
+    result = Number(numA) - Number(numB);
+}
+
+//function to multiply
+function multiply() {
+    let product;
+    let numA = digits1.join(``);
+    let numB = digits2.join(``);
+    console.log(product = Number(numA) * Number(numB));
+    if(product.toString().length > 16) {
+        product = product.toString().slice(0,16);
+        result = Number(product);
+    } else {
+        result = product;
+    };
 }
 
 //function to divide numbers
-function quotient () {
+function divide () {
     let quotient;
     let numA = digits1.join(``);
     let numB = digits2.join(``);
@@ -343,21 +365,19 @@ function quotient () {
         result = Number(quotient);
     } else {
         result = quotient;
-    }
-    
-  
+    };
+ 
 }
 
 
 
 
+//optimize numbers for the screen
 
 
 //save the latest result to GT
 
 
-
-//cancel current operation when pressing CE and return the latest result
 
 
 // test keydown##########

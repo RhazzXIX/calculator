@@ -8,6 +8,3 @@ Odin Project fundamentals. HTML, CSS, JavaScript fundamental knowledge
 will be used.
 
 Wood background is from caveman of https://wallpapercave.com/hd-wood-background
-
-
-
