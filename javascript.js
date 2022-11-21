@@ -66,7 +66,7 @@ function showDigits() {
 
 //show button input at the display
 gTotal.addEventListener('click', (e) => {
-    if(gtAlert === false) {alertGT.textContent = ' '};
+    if(gtAlert === false) alertGT.textContent = ' ';
     screen.textContent = `${grandTotal}`;
     gtAlert = false;
 });
@@ -83,7 +83,9 @@ sign.addEventListener('click', (e) => {
 
 });
 gClear.addEventListener('click', (e) => {
-    screen.textContent = '0';
+    screen.textContent = 0;
+    alertGT.textContent = '';
+    alertE.textContent = '';
     digits1.splice(0, 16);
     digits2.splice(0, 16);
     addition = false;
