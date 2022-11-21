@@ -6,7 +6,7 @@ const alertGT = document.querySelector(`#alertGT`);
 //anchor buttons
 const gTotal = document.querySelector('#gTotal');
 const back = document.querySelector('#back');
-const clearEntry = document.querySelector('#cEntry');
+const sign = document.querySelector('#signed');
 const gClear = document.querySelector('#gClear');
 const seven = document.querySelector('#seven');
 const eight = document.querySelector('#eight');
@@ -28,7 +28,7 @@ const plus = document.querySelector(`#plus`);
 // array that will be displayed in the screen
 let digits1 = [];
 let digits2 = [];
-let grandTotal = null;
+let grandTotal = 0;
 let result = null;
 
 //boolean variables to for calculator flow
@@ -39,6 +39,7 @@ let multiplication = false;
 let quotient = false;
 let gtAlert = false;
 let point = false;
+let signed = false;
 
 //function that shows the array in the screen
 function showDigits() {
@@ -77,8 +78,9 @@ back.addEventListener('click', (e) => {
     };
     showDigits();
 });
-clearEntry.addEventListener('click', (e) => {
-    screen.textContent = '0';
+sign.addEventListener('click', (e) => {
+    showDigits();
+
 });
 gClear.addEventListener('click', (e) => {
     screen.textContent = '0';
@@ -232,47 +234,57 @@ nine.addEventListener('click', (e) => {
 equals.addEventListener('click', (e) => {
     alertGT.textContent = 'GT';
     gtAlert = true;
-    if(addition === true) {
-        add();
-        screen.textContent = `${result}`;
-        grandTotal = result;
-    };
-    if(quotient === true) {
-        quotient();
-        screen.textContent = `${result}`;
-        grandTotal = result;
-    };
+    selectOpertaion();
+    screen.textContent = `${result}`;
+    grandTotal = result;
     addition = false;
+    subtraction = false;
+    multiplication = false;
+    quotient = false;
+    point = false;
     nextDigit = false;
     digits1.splice(0, 16);
     digits2.splice(0, 16);
 });
+
 plus.addEventListener('click', (e) => {
     showDigits();
     nextDigit = true;
     addition = true;
+    subtraction = false;
+    multiplication = false;
     quotient = false;
     point = false;
 });
-times.addEventListener('click', (e) => {
-    screen.textContent = 'x';
-    nextDigit = true;
-    addition = false;
-    quotient = false;
-    point = false;
-});
+
 minus.addEventListener('click', (e) => {
-    screen.textContent = '-';
+    showDigits();
     nextDigit = true;
+    subtraction = true;
     addition = false;
+    multiplication = false;
     quotient = false;
     point = false;
 });
+
+times.addEventListener('click', (e) => {
+    showDigits();
+    nextDigit = true;
+    multiplication = true;
+    addition = false;
+    subtraction = false;
+    quotient = false;
+    point = false;
+});
+
 division.addEventListener('click', (e) => {
     showDigits();
     nextDigit = true;
     quotient = true;
     addition = false;
+    subtraction = false;
+    multiplication = false;
+    point = false;
 });
 
 //flash the screen when pressing the operation signs
@@ -366,7 +378,14 @@ function divide () {
     } else {
         result = quotient;
     };
- 
+}
+
+//function to select operators
+function selectOpertaion () {
+    if(addition === true) add();
+    if(subtraction === true) subtract();
+    if(multiplication === true) multiply();
+    if(quotient === true) divide();
 }
 
 
