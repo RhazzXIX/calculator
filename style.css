@@ -1,6 +1,6 @@
 @font-face {
     font-family: Digital;
-    src: url(./Digital7-rg1mL.ttf);
+    src: url(./Calculatrix7Regular-zEM1.ttf);
 }
 body {
     height: 100vh;
@@ -24,12 +24,12 @@ body {
 #calcbody{
     display: flex;
     flex-direction: column;
-    border: 8px solid black;
+    border: 8px solid rgb(58, 58, 58);
     width: 500px;
     padding: 24px;
     background-color:#a5fddf;
     border-radius: 18px;
-
+    box-shadow: -15px -15px #68a08d;
 }
 
 #display {
@@ -38,6 +38,7 @@ body {
     margin-bottom: 42px;
     margin-top: 20px;
     border-radius: 10px;
+    box-shadow: -5px -5px grey;
 }
 
 #screen {
@@ -45,10 +46,10 @@ body {
     display: flex;
     flex-direction: row-reverse;
     align-items: flex-end;
-    height: 78px;
+    height: 100px;
     width: 490px;
-    font-size: 52px;
-    padding: 10px;
+    font-size: 48px;
+    padding-right: 10px;
     box-sizing: border-box;
     background-color: rgb(221, 221, 221);
     border-top-right-radius: 6px;
@@ -85,7 +86,6 @@ body {
     justify-content: space-around;
     flex-wrap: wrap;
 }
-
 
 button.keys {
     font-size: 50px;

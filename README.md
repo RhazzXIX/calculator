@@ -8,3 +8,4 @@ Odin Project fundamentals. HTML, CSS, JavaScript fundamental knowledge
 will be used.
 
 Wood background is from caveman of https://wallpapercave.com/hd-wood-background
+Font is Calcualtrix 7 by Pixel Kitchen at https://www.fontspace.com/pixel-kitchen

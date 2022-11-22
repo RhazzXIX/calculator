@@ -48,7 +48,7 @@ function showDigits() {
             screen.textContent = 0;
         } else {
             screen.textContent = `${digits1.join('')}`;
-            if(digits1.length == 16) {
+            if(digits1.length == 13) {
                 alertE.textContent = 'Max';
             };
         };
@@ -57,7 +57,7 @@ function showDigits() {
             screen.textContent = 0;
         } else {
             screen.textContent = `${digits2.join('')}`
-            if(digits2.length == 16) {
+            if(digits2.length == 13) {
                 alertE.textContent = 'Max';
             };
         };
@@ -104,8 +104,8 @@ gClear.addEventListener('click', (e) => {
     screen.textContent = 0;
     alertGT.textContent = '';
     alertE.textContent = '';
-    digits1.splice(0, 16);
-    digits2.splice(0, 16);
+    digits1.splice(0, 13);
+    digits2.splice(0, 13);
     addition = false;
     dividion = false;
     subtraction = false;
@@ -114,13 +114,13 @@ gClear.addEventListener('click', (e) => {
 });
 dot.addEventListener('click', (e) => {
     if(nextDigit === false) {
-        if(digits1.length < 16) {
+        if(digits1.length < 13) {
             if(point === false) {
                 digits1.push('.');
             }
         };
     } else if (nextDigit === true) {
-        if(digits2.length < 16) {
+        if(digits2.length < 13) {
             if(point === false) {
                 digits2.push('.');
             }
@@ -131,11 +131,11 @@ dot.addEventListener('click', (e) => {
 });
 zero.addEventListener('click', (e) => {
     if(nextDigit === false) {
-        if(digits1.length < 16 && digits1.length > 0) {
+        if(digits1.length < 13 && digits1.length > 0) {
             digits1.push(0);
         };
     } else if (nextDigit === true) {
-        if(digits2.length < 16 && digits1.length > 0) {
+        if(digits2.length < 13 && digits1.length > 0) {
             digits2.push(0);
         };
     }
@@ -143,11 +143,11 @@ zero.addEventListener('click', (e) => {
 });
 one.addEventListener('click', (e) => {
     if(nextDigit === false) {
-        if(digits1.length < 16) {
+        if(digits1.length < 13) {
             digits1.push(1);
         };
     } else if (nextDigit === true) {
-        if(digits2.length < 16) {
+        if(digits2.length < 13) {
             digits2.push(1);
         };
     }
@@ -155,11 +155,11 @@ one.addEventListener('click', (e) => {
 });
 two.addEventListener('click', (e) => {
     if(nextDigit === false) {
-        if(digits1.length < 16) {
+        if(digits1.length < 13) {
             digits1.push(2);
         };
     } else if (nextDigit === true) {
-        if(digits2.length < 16) {
+        if(digits2.length < 13) {
             digits2.push(2);
         };
     }
@@ -167,11 +167,11 @@ two.addEventListener('click', (e) => {
 });
 three.addEventListener('click', (e) => {
     if(nextDigit === false) {
-        if(digits1.length < 16) {
+        if(digits1.length < 13) {
             digits1.push(3);
         };
     } else if (nextDigit === true) {
-        if(digits2.length < 16) {
+        if(digits2.length < 13) {
             digits2.push(3);
         };
     }
@@ -179,11 +179,11 @@ three.addEventListener('click', (e) => {
 });
 four.addEventListener('click', (e) => {
     if(nextDigit === false) {
-        if(digits1.length < 16) {
+        if(digits1.length < 13) {
             digits1.push(4);
         };
     } else if (nextDigit === true) {
-        if(digits2.length < 16) {
+        if(digits2.length < 13) {
             digits2.push(4);
         };
     }
@@ -191,11 +191,11 @@ four.addEventListener('click', (e) => {
 });
 five.addEventListener('click', (e) => {
     if(nextDigit === false) {
-        if(digits1.length < 16) {
+        if(digits1.length < 13) {
             digits1.push(5);
         };
     } else if (nextDigit === true) {
-        if(digits2.length < 16) {
+        if(digits2.length < 13) {
             digits2.push(5);
         };
     }
@@ -203,11 +203,11 @@ five.addEventListener('click', (e) => {
 })
 six.addEventListener('click', (e) => {
     if(nextDigit === false) {
-        if(digits1.length < 16) {
+        if(digits1.length < 13) {
             digits1.push(6);
         };
     } else if (nextDigit === true) {
-        if(digits2.length < 16) {
+        if(digits2.length < 13) {
             digits2.push(6);
         };
     }
@@ -215,11 +215,11 @@ six.addEventListener('click', (e) => {
 });
 seven.addEventListener('click', (e) => {
     if(nextDigit === false) {
-        if(digits1.length < 16) {
+        if(digits1.length < 13) {
             digits1.push(7);
         };
     } else if (nextDigit === true) {
-        if(digits2.length < 16) {
+        if(digits2.length < 13) {
             digits2.push(7);
         };
     }
@@ -227,11 +227,11 @@ seven.addEventListener('click', (e) => {
 });
 eight.addEventListener('click', (e) => {
       if(nextDigit === false) {
-        if(digits1.length < 16) {
+        if(digits1.length < 13) {
             digits1.push(8);
         };
     } else if (nextDigit === true) {
-        if(digits2.length < 16) {
+        if(digits2.length < 13) {
             digits2.push(8);
         };
     }
@@ -239,11 +239,11 @@ eight.addEventListener('click', (e) => {
 });
 nine.addEventListener('click', (e) => {
     if(nextDigit === false) {
-        if(digits1.length < 16) {
+        if(digits1.length < 13) {
             digits1.push(9);
         };
     } else if (nextDigit === true) {
-        if(digits2.length < 16) {
+        if(digits2.length < 13) {
             digits2.push(9);
         };
     }
@@ -263,8 +263,8 @@ equals.addEventListener('click', (e) => {
     quotient = false;
     point = false;
     nextDigit = false;
-    digits1.splice(0, 16);
-    digits2.splice(0, 16);
+    digits1.splice(0, 13);
+    digits2.splice(0, 13);
 });
 
 plus.addEventListener('click', (e) => {
@@ -378,8 +378,8 @@ function multiply() {
     let numA = digits1.join(``);
     let numB = digits2.join(``);
     console.log(product = Number(numA) * Number(numB));
-    if(product.toString().length > 16) {
-        product = product.toString().slice(0,16);
+    if(product.toString().length > 13) {
+        product = product.toString().slice(0,13);
         result = Number(product);
     } else {
         result = product;
@@ -392,8 +392,8 @@ function divide () {
     let numA = digits1.join(``);
     let numB = digits2.join(``);
     quotient = Number(numA) / Number(numB);
-    if(quotient.toString().length > 16) {
-        quotient = quotient.toString().slice(0,16);
+    if(quotient.toString().length > 13) {
+        quotient = quotient.toString().slice(0,13);
         result = Number(quotient);
     } else {
         result = quotient;
