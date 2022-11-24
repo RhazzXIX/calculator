@@ -41,6 +41,7 @@ let gtAlert = false;
 let point = false;
 let signed = false;
 
+
 //function that shows the array in the screen
 function showDigits() {
     if(nextDigit === false) {
@@ -68,6 +69,8 @@ function showDigits() {
 gTotal.addEventListener('click', (e) => {
     if(gtAlert === false) alertGT.textContent = ' ';
     screen.textContent = `${grandTotal}`;
+    result = grandTotal;
+    nextDigit = true;
     gtAlert = false;
 });
 back.addEventListener('click', (e) => {
@@ -107,9 +110,10 @@ gClear.addEventListener('click', (e) => {
     digits1.splice(0, 13);
     digits2.splice(0, 13);
     addition = false;
-    dividion = false;
+    quotient = false;
     subtraction = false;
     multiplication = false;
+    nextDigit = false;
     e.stopPropagation();
 });
 dot.addEventListener('click', (e) => {
@@ -254,7 +258,7 @@ nine.addEventListener('click', (e) => {
 equals.addEventListener('click', (e) => {
     alertGT.textContent = 'GT';
     gtAlert = true;
-    selectOpertaion();
+    operate();
     screen.textContent = `${result}`;
     grandTotal = result;
     addition = false;
@@ -262,49 +266,103 @@ equals.addEventListener('click', (e) => {
     multiplication = false;
     quotient = false;
     point = false;
-    nextDigit = false;
-    digits1.splice(0, 13);
-    digits2.splice(0, 13);
 });
 
+//function to operate
+function operate () {
+    if(addition === true) add();
+    if(subtraction === true) subtract();
+    if(multiplication === true) multiply();
+    if(quotient === true) divide();
+    digits1.splice(0, 13);
+    digits2.splice(0, 13);
+}
+
+
+//function to add the digits
+function add() {
+    let numA = digits1.join(``);
+    let numB = digits2.join(``);
+    result = Number(numA) + Number(numB);
+}
+
 plus.addEventListener('click', (e) => {
-    showDigits();
-    nextDigit = true;
-    addition = true;
-    subtraction = false;
-    multiplication = false;
-    quotient = false;
-    point = false;
+    if(nextDigit === false){
+        showDigits();
+        nextDigit = true;
+        addition = true;
+        subtraction = false;
+        multiplication = false;
+        quotient = false;
+        point = false;        
+    } else if (nextDigit === true) {
+        operate();
+        screen.textContent = `${result}`;
+        digits1.push(result);
+    };
 });
 
 minus.addEventListener('click', (e) => {
-    showDigits();
-    nextDigit = true;
-    subtraction = true;
-    addition = false;
-    multiplication = false;
-    quotient = false;
-    point = false;
+    if(nextDigit === false) {
+        showDigits();
+        nextDigit = true;
+        subtraction = true;
+        addition = false;
+        multiplication = false;
+        quotient = false;
+        point = false;       
+    } else if (nextDigit === true) {
+        operate();
+        screen.textContent = `${result}`;
+        digits1.push(result);
+        subtraction = true;
+        addition = false;
+        multiplication = false;
+        quotient = false;
+        point = false;       
+    };
 });
 
 times.addEventListener('click', (e) => {
-    showDigits();
-    nextDigit = true;
-    multiplication = true;
-    addition = false;
-    subtraction = false;
-    quotient = false;
-    point = false;
+    if(nextDigit === false) {
+        showDigits();
+        nextDigit = true;
+        multiplication = true;
+        addition = false;
+        subtraction = false;
+        quotient = false;
+        point = false;
+    } else if (nextDigit === true) {
+        operate();
+        screen.textContent = `${result}`;
+        digits1.push(result);
+        multiplication = true;
+        addition = false;
+        subtraction = false;
+        quotient = false;
+        point = false;
+    };
 });
 
 division.addEventListener('click', (e) => {
-    showDigits();
-    nextDigit = true;
-    quotient = true;
-    addition = false;
-    subtraction = false;
-    multiplication = false;
-    point = false;
+    if(nextDigit === false) {
+        showDigits();
+        nextDigit = true;
+        quotient = true;
+        addition = false;
+        subtraction = false;
+        multiplication = false;
+        point = false;  
+    } else if (nextDigit === true) {
+        operate();
+        screen.textContent = `${result}`;
+        digits1.push(result);
+        quotient = true;
+        addition = false;
+        subtraction = false;
+        multiplication = false;
+        point = false; 
+    };
 });
 
 //flash the screen when pressing the operation signs
@@ -357,12 +415,6 @@ gTotal.addEventListener('mouseup', (e) => {
     e.stopPropagation();
 });
 
-//function to add the digits
-function add() {
-    let numA = digits1.join(``);
-    let numB = digits2.join(``);
-    result = Number(numA) + Number(numB);
-}
 
 //function to subtract
 
@@ -377,7 +429,7 @@ function multiply() {
     let product;
     let numA = digits1.join(``);
     let numB = digits2.join(``);
-    console.log(product = Number(numA) * Number(numB));
+    product = Number(numA) * Number(numB);
     if(product.toString().length > 13) {
         product = product.toString().slice(0,13);
         result = Number(product);
@@ -400,13 +452,6 @@ function divide () {
     };
 }
 
-//function to select operators
-function selectOpertaion () {
-    if(addition === true) add();
-    if(subtraction === true) subtract();
-    if(multiplication === true) multiply();
-    if(quotient === true) divide();
-}
 
 
 
