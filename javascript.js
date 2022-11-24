@@ -67,20 +67,24 @@ sign.addEventListener('click', (e) => {
     toggleSign();
     showDigits();
 });
-//function for checking for number sign
+
 function toggleSign() {
     if(nextDigit === false) {
-        if(digits1[0] !== '-') {
-            digits1.unshift('-');
-        } else if (digits1[0] === '-') {
-            digits1.shift('-');
-        }
+        if(digits1.length > 0) {
+            if(digits1[0] !== '-') {
+                digits1.unshift('-');
+            } else if (digits1[0] === '-') {
+                digits1.shift('-');
+            };
+        };
     } else {
-        if(digits2[0] !== '-') {
-            digits2.unshift('-');
-        } else if (digits1[0] === '-') {
-            digits2.shift('-');
-        }
+        if(digits2.length > 0) {
+            if(digits2[0] !== '-') {
+                digits2.unshift('-');
+            } else if (digits1[0] === '-') {
+                digits2.shift('-');
+            };
+        };
     };
 }
 
