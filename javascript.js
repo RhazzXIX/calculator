@@ -29,7 +29,7 @@ const plus = document.querySelector(`#plus`);
 let digits1 = [];
 let digits2 = [];
 let grandTotal = 0;
-let result = null;
+let result = 0;
 
 //boolean variables to for calculator flow
 let nextDigit = false;
@@ -38,7 +38,6 @@ let subtraction = false;
 let multiplication = false;
 let quotient = false;
 let gtAlert = false;
-let point = false;
 let signed = false;
 
 
@@ -46,7 +45,7 @@ let signed = false;
 function showDigits() {
     if(nextDigit === false) {
         if(digits1.length == 0) {
-            screen.textContent = 0;
+            screen.textContent = `${result}`;
         } else {
             screen.textContent = `${digits1.join('')}`;
             if(digits1.length == 13) {
@@ -55,7 +54,7 @@ function showDigits() {
         };
     } else if (nextDigit === true) {
         if(digits2.length == 0) {
-            screen.textContent = 0;
+            screen.textContent = `${result}`;
         } else {
             screen.textContent = `${digits2.join('')}`
             if(digits2.length == 13) {
@@ -104,7 +103,7 @@ function toggleSign() {
 }
 gClear.addEventListener('click', (e) => {
     result = 0;
-    screen.textContent = 0;
+    screen.textContent = `${result}`;
     alertGT.textContent = '';
     alertE.textContent = '';
     digits1.splice(0, 13);
@@ -119,18 +118,17 @@ gClear.addEventListener('click', (e) => {
 dot.addEventListener('click', (e) => {
     if(nextDigit === false) {
         if(digits1.length < 13) {
-            if(point === false) {
+            if(digits1.join('').includes('.') === false) {
                 digits1.push('.');
             }
         };
     } else if (nextDigit === true) {
         if(digits2.length < 13) {
-            if(point === false) {
+            if(digits2.join('').includes('.') === false) {
                 digits2.push('.');
             }
         };
     }
-    point = true;
     showDigits();
 });
 zero.addEventListener('click', (e) => {
@@ -265,7 +263,7 @@ equals.addEventListener('click', (e) => {
     subtraction = false;
     multiplication = false;
     quotient = false;
-    point = false;
+    nextDigit = false;
 });
 
 //function to operate
@@ -287,14 +285,16 @@ function add() {
 }
 
 plus.addEventListener('click', (e) => {
+    if(digits1[0] === undefined) {
+        digits1.push(result);
+    };
     if(nextDigit === false){
         showDigits();
         nextDigit = true;
         addition = true;
         subtraction = false;
         multiplication = false;
-        quotient = false;
-        point = false;        
+        quotient = false;        
     } else if (nextDigit === true) {
         operate();
         screen.textContent = `${result}`;
@@ -303,6 +303,9 @@ plus.addEventListener('click', (e) => {
 });
 
 minus.addEventListener('click', (e) => {
+    if(digits1[0] === undefined) {
+        digits1.push(result);
+    };
     if(nextDigit === false) {
         showDigits();
         nextDigit = true;
@@ -310,7 +313,6 @@ minus.addEventListener('click', (e) => {
         addition = false;
         multiplication = false;
         quotient = false;
-        point = false;       
     } else if (nextDigit === true) {
         operate();
         screen.textContent = `${result}`;
@@ -319,11 +321,13 @@ minus.addEventListener('click', (e) => {
         addition = false;
         multiplication = false;
         quotient = false;
-        point = false;       
     };
 });
 
 times.addEventListener('click', (e) => {
+    if(digits1[0] === undefined) {
+        digits1.push(result);
+    };
     if(nextDigit === false) {
         showDigits();
         nextDigit = true;
@@ -331,7 +335,6 @@ times.addEventListener('click', (e) => {
         addition = false;
         subtraction = false;
         quotient = false;
-        point = false;
     } else if (nextDigit === true) {
         operate();
         screen.textContent = `${result}`;
@@ -340,11 +343,13 @@ times.addEventListener('click', (e) => {
         addition = false;
         subtraction = false;
         quotient = false;
-        point = false;
     };
 });
 
 division.addEventListener('click', (e) => {
+    if(digits1[0] === undefined) {
+        digits1.push(result);
+    };
     if(nextDigit === false) {
         showDigits();
         nextDigit = true;
@@ -352,7 +357,6 @@ division.addEventListener('click', (e) => {
         addition = false;
         subtraction = false;
         multiplication = false;
-        point = false;  
     } else if (nextDigit === true) {
         operate();
         screen.textContent = `${result}`;
@@ -361,7 +365,7 @@ division.addEventListener('click', (e) => {
         addition = false;
         subtraction = false;
         multiplication = false;
-        point = false; 
+        
     };
 });
 
