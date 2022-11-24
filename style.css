@@ -109,6 +109,10 @@ button.keys:active{
     
 }
 
+button#equals {
+    width: 215px;
+}
+
 button#back {
     padding-bottom: 14px;
 }
