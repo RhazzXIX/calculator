@@ -34,6 +34,7 @@ let subtraction = false;
 let multiplication = false;
 let quotient = false;
 let signed = false;
+let calculate = false;
 
 
 //function that shows the array in the screen
@@ -82,6 +83,7 @@ function toggleSign() {
         }
     };
 }
+
 gClear.addEventListener('click', (e) => {
     result = 0;
     screen.textContent = `${result}`;
@@ -92,8 +94,10 @@ gClear.addEventListener('click', (e) => {
     subtraction = false;
     multiplication = false;
     nextDigit = false;
+    calculate = false;
     e.stopPropagation();
 });
+
 dot.addEventListener('click', (e) => {
     if(nextDigit === false) {
         if(digits1.join('').includes('.') === false) {
@@ -162,43 +166,76 @@ nine.addEventListener('click', (e) => {
     inputDigit(9);
 });
 
-//do the operations when pressing the equals
 equals.addEventListener('click', (e) => {
-    operate();
+    if(calculate === false) {
+        showDigits();
+    } else if (calculate === true) {
+        operate();
+        calculate = false;
+    };
+});
+
+function operate () {
+    if(digits1[0] === undefined) {
+        digits1.push(result);
+    };
+    if(addition === true) add();
+    if(subtraction === true) subtract();
+    if(multiplication === true) multiply();
+    if(quotient === true) divide();
     screen.textContent = `${result}`;
+    digits1.splice(0, 13);
+    digits2.splice(0, 13);
     addition = false;
     subtraction = false;
     multiplication = false;
     quotient = false;
     nextDigit = false;
-});
-
-//function to operate
-function operate () {
-    if(addition === true) add();
-    if(subtraction === true) subtract();
-    if(multiplication === true) multiply();
-    if(quotient === true) divide();
-    digits1.splice(0, 13);
-    digits2.splice(0, 13);
 }
 
-
-//function to add the digits
 function add() {
     let numA = digits1.join(``);
     let numB = digits2.join(``);
     result = Number(numA) + Number(numB);
 }
 
+function subtract() {
+    let numA = digits1.join(``);
+    let numB = digits2.join(``);
+    result = Number(numA) - Number(numB);
+}
+
+function multiply() {
+    let product;
+    let numA = digits1.join(``);
+    let numB = digits2.join(``);
+    product = Number(numA) * Number(numB);
+    result = product;
+    if(product.toString().length > 13) {
+        result = product.toPrecision(8);
+    } else {
+        result = product;
+    };
+}
+
+function divide () {
+    let quotient;
+    let numA = digits1.join(``);
+    let numB = digits2.join(``);
+    quotient = Number(numA) / Number(numB);
+    if(quotient.toString().length > 13) {
+        result = quotient.toPrecision(10);
+    } else {
+        result = quotient;
+    };
+}
+
 plus.addEventListener('click', (e) => {
+    calculate = true;
     addition = true;
     subtraction = false;
     multiplication = false;
     quotient = false;
-    if(digits1[0] === undefined) {
-        digits1.push(result);
-    };
     if(nextDigit === false){
         showDigits();
         nextDigit = true;
@@ -210,13 +247,11 @@ plus.addEventListener('click', (e) => {
 });
 
 minus.addEventListener('click', (e) => {
+    calculate = true;
     subtraction = true;
     addition = false;
     multiplication = false;
     quotient = false;
-    if(digits1[0] === undefined) {
-        digits1.push(result);
-    };
     if(nextDigit === false) {
         showDigits();
         nextDigit = true;
@@ -228,13 +263,11 @@ minus.addEventListener('click', (e) => {
 });
 
 times.addEventListener('click', (e) => {
+    calculate = true;
     multiplication = true;
     addition = false;
     subtraction = false;
     quotient = false;
-    if(digits1[0] === undefined) {
-        digits1.push(result);
-    };
     if(nextDigit === false) {
         showDigits();
         nextDigit = true;
@@ -246,13 +279,11 @@ times.addEventListener('click', (e) => {
 });
 
 division.addEventListener('click', (e) => {
+    calculate = true;
     quotient = true;
     addition = false;
     subtraction = false;
     multiplication = false;
-    if(digits1[0] === undefined) {
-        digits1.push(result);
-    };
     if(nextDigit === false) {
         showDigits();
         nextDigit = true;
@@ -304,43 +335,6 @@ equals.addEventListener('mouseup', (e) => {
     screen.style.color = 'black';
     e.stopPropagation();
 });
-
-
-//function to subtract
-
-function subtract() {
-    let numA = digits1.join(``);
-    let numB = digits2.join(``);
-    result = Number(numA) - Number(numB);
-}
-
-
-function multiply() {
-    let product;
-    let numA = digits1.join(``);
-    let numB = digits2.join(``);
-    product = Number(numA) * Number(numB);
-    result = product;
-    if(product.toString().length > 13) {
-        result = product.toPrecision(8);
-    } else {
-        result = product;
-    };
-}
-
-//function to divide numbers
-function divide () {
-    let quotient;
-    let numA = digits1.join(``);
-    let numB = digits2.join(``);
-    quotient = Number(numA) / Number(numB);
-    if(quotient.toString().length > 13) {
-        result = quotient.toPrecision(10);
-    } else {
-        result = quotient;
-    };
-}
-
 
 // test keydown##########
 // const body = document.querySelector(`body`);
