@@ -117,139 +117,69 @@ gClear.addEventListener('click', (e) => {
 });
 dot.addEventListener('click', (e) => {
     if(nextDigit === false) {
+        if(digits1.join('').includes('.') === false) {
+            if(digits1.length === 0) {
+                inputDigit(0);
+                inputDigit('.');
+            } else {
+                inputDigit('.');
+            };
+            
+        };
+    } else if (nextDigit === true) {
+        if(digits2.join('').includes('.') === false) {
+            if(digits2.length === 0) {
+                inputDigit(0);
+                inputDigit('.');
+            } else {
+                inputDigit('.');
+            };
+        };
+    };
+    showDigits();
+});
+function inputDigit(num) {
+    if(nextDigit === false) {
         if(digits1.length < 13) {
-            if(digits1.join('').includes('.') === false) {
-                digits1.push('.');
-            }
+            digits1.push(num);
         };
     } else if (nextDigit === true) {
         if(digits2.length < 13) {
-            if(digits2.join('').includes('.') === false) {
-                digits2.push('.');
-            }
+            digits2.push(num);
         };
     }
     showDigits();
-});
+}
+
 zero.addEventListener('click', (e) => {
-    if(nextDigit === false) {
-        if(digits1.length < 13 && digits1.length > 0) {
-            digits1.push(0);
-        };
-    } else if (nextDigit === true) {
-        if(digits2.length < 13 && digits1.length > 0) {
-            digits2.push(0);
-        };
-    }
-    showDigits();
+    if(digits1.length > 0) inputDigit(0);
 });
 one.addEventListener('click', (e) => {
-    if(nextDigit === false) {
-        if(digits1.length < 13) {
-            digits1.push(1);
-        };
-    } else if (nextDigit === true) {
-        if(digits2.length < 13) {
-            digits2.push(1);
-        };
-    }
-    showDigits();
+    inputDigit(1);
 });
 two.addEventListener('click', (e) => {
-    if(nextDigit === false) {
-        if(digits1.length < 13) {
-            digits1.push(2);
-        };
-    } else if (nextDigit === true) {
-        if(digits2.length < 13) {
-            digits2.push(2);
-        };
-    }
-    showDigits();
+    inputDigit(2);
 });
 three.addEventListener('click', (e) => {
-    if(nextDigit === false) {
-        if(digits1.length < 13) {
-            digits1.push(3);
-        };
-    } else if (nextDigit === true) {
-        if(digits2.length < 13) {
-            digits2.push(3);
-        };
-    }
-    showDigits();
+    inputDigit(3);
 });
 four.addEventListener('click', (e) => {
-    if(nextDigit === false) {
-        if(digits1.length < 13) {
-            digits1.push(4);
-        };
-    } else if (nextDigit === true) {
-        if(digits2.length < 13) {
-            digits2.push(4);
-        };
-    }
-    showDigits();
+    inputDigit(4);
 });
 five.addEventListener('click', (e) => {
-    if(nextDigit === false) {
-        if(digits1.length < 13) {
-            digits1.push(5);
-        };
-    } else if (nextDigit === true) {
-        if(digits2.length < 13) {
-            digits2.push(5);
-        };
-    }
-    showDigits();
+    inputDigit(5);
 })
 six.addEventListener('click', (e) => {
-    if(nextDigit === false) {
-        if(digits1.length < 13) {
-            digits1.push(6);
-        };
-    } else if (nextDigit === true) {
-        if(digits2.length < 13) {
-            digits2.push(6);
-        };
-    }
-    showDigits();
+    inputDigit(6);
 });
 seven.addEventListener('click', (e) => {
-    if(nextDigit === false) {
-        if(digits1.length < 13) {
-            digits1.push(7);
-        };
-    } else if (nextDigit === true) {
-        if(digits2.length < 13) {
-            digits2.push(7);
-        };
-    }
-    showDigits();
+    inputDigit(7);
 });
 eight.addEventListener('click', (e) => {
-      if(nextDigit === false) {
-        if(digits1.length < 13) {
-            digits1.push(8);
-        };
-    } else if (nextDigit === true) {
-        if(digits2.length < 13) {
-            digits2.push(8);
-        };
-    }
-    showDigits();
+    inputDigit(8);;
 });
 nine.addEventListener('click', (e) => {
-    if(nextDigit === false) {
-        if(digits1.length < 13) {
-            digits1.push(9);
-        };
-    } else if (nextDigit === true) {
-        if(digits2.length < 13) {
-            digits2.push(9);
-        };
-    }
-    showDigits();
+    inputDigit(9);
 });
 
 //do the operations when pressing the equals
@@ -285,87 +215,74 @@ function add() {
 }
 
 plus.addEventListener('click', (e) => {
+    addition = true;
+    subtraction = false;
+    multiplication = false;
+    quotient = false;
     if(digits1[0] === undefined) {
         digits1.push(result);
     };
     if(nextDigit === false){
         showDigits();
         nextDigit = true;
-        addition = true;
-        subtraction = false;
-        multiplication = false;
-        quotient = false;        
     } else if (nextDigit === true) {
         operate();
         screen.textContent = `${result}`;
         digits1.push(result);
-    };
+    };        
 });
 
 minus.addEventListener('click', (e) => {
+    subtraction = true;
+    addition = false;
+    multiplication = false;
+    quotient = false;
     if(digits1[0] === undefined) {
         digits1.push(result);
     };
     if(nextDigit === false) {
         showDigits();
         nextDigit = true;
-        subtraction = true;
-        addition = false;
-        multiplication = false;
-        quotient = false;
     } else if (nextDigit === true) {
         operate();
         screen.textContent = `${result}`;
         digits1.push(result);
-        subtraction = true;
-        addition = false;
-        multiplication = false;
-        quotient = false;
     };
 });
 
 times.addEventListener('click', (e) => {
+    multiplication = true;
+    addition = false;
+    subtraction = false;
+    quotient = false;
     if(digits1[0] === undefined) {
         digits1.push(result);
     };
     if(nextDigit === false) {
         showDigits();
         nextDigit = true;
-        multiplication = true;
-        addition = false;
-        subtraction = false;
-        quotient = false;
     } else if (nextDigit === true) {
         operate();
         screen.textContent = `${result}`;
         digits1.push(result);
-        multiplication = true;
-        addition = false;
-        subtraction = false;
-        quotient = false;
     };
 });
 
 division.addEventListener('click', (e) => {
+    quotient = true;
+    addition = false;
+    subtraction = false;
+    multiplication = false;
     if(digits1[0] === undefined) {
         digits1.push(result);
     };
     if(nextDigit === false) {
         showDigits();
         nextDigit = true;
-        quotient = true;
-        addition = false;
-        subtraction = false;
-        multiplication = false;
     } else if (nextDigit === true) {
         operate();
         screen.textContent = `${result}`;
-        digits1.push(result);
-        quotient = true;
-        addition = false;
-        subtraction = false;
-        multiplication = false;
-        
+        digits1.push(result);        
     };
 });
 
@@ -455,17 +372,6 @@ function divide () {
         result = quotient;
     };
 }
-
-
-
-
-
-//optimize numbers for the screen
-
-
-//save the latest result to GT
-
-
 
 
 // test keydown##########
