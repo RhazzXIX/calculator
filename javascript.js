@@ -92,8 +92,8 @@ function operate () {
     if (calculate === false) {
         showDigits();
     } else { 
-        if(digits1[0] === undefined) {
-            digits1 = result.toString().split('');
+        if(digits1.length === 0) {
+            digits1 = result.toString().split(''); 
         };
         if(addition === true) add();
         if(subtraction === true) subtract();
@@ -300,7 +300,6 @@ plus.addEventListener('click', (e) => {
     } else if (nextDigit === true) {
         operate();
         screen.textContent = `${result}`;
-        digits1.push(result);
     }; 
     nextDigit = true; 
     addition = true;
@@ -316,7 +315,6 @@ minus.addEventListener('click', (e) => {
     } else if (nextDigit === true) {
         operate();
         screen.textContent = `${result}`;
-        digits1.push(result);
     };
     nextDigit = true; 
     subtraction = true;
@@ -332,7 +330,6 @@ times.addEventListener('click', (e) => {
     } else if (nextDigit === true) {
         operate();
         screen.textContent = `${result}`;
-        digits1.push(result);
     };
     nextDigit = true; 
     multiplication = true;
@@ -347,8 +344,7 @@ division.addEventListener('click', (e) => {
         showDigits();
     } else if (nextDigit === true) {
         operate();
-        screen.textContent = `${result}`;
-        digits1.push(result);   
+        screen.textContent = `${result}`;   
     };
     nextDigit = true; 
     quotient = true;
@@ -413,8 +409,7 @@ window.addEventListener('keydown', (e) => {
                 showDigits();
             } else if (nextDigit === true) {
                 operate();
-                screen.textContent = `${result}`;
-                digits1.push(result);   
+                screen.textContent = `${result}`;  
             };
             nextDigit = true; 
             quotient = true;
@@ -428,7 +423,6 @@ window.addEventListener('keydown', (e) => {
             } else if (nextDigit === true) {
                 operate();
                 screen.textContent = `${result}`;
-                digits1.push(result);
             };
             nextDigit = true; 
             multiplication = true;
@@ -442,7 +436,6 @@ window.addEventListener('keydown', (e) => {
             } else if (nextDigit === true) {
                 operate();
                 screen.textContent = `${result}`;
-                digits1.push(result);
             };
             nextDigit = true; 
             subtraction = true;
@@ -456,7 +449,6 @@ window.addEventListener('keydown', (e) => {
             } else if (nextDigit === true) {
                 operate();
                 screen.textContent = `${result}`;
-                digits1.push(result);
             }; 
             nextDigit = true; 
             addition = true;
@@ -479,7 +471,7 @@ window.addEventListener('keydown', (e) => {
                 }
             } else {
                 digits2.pop();
-                if(digits2.length === 0){
+                if(digits2.length === 0){7+
                     digits2.push(0);
                 };
             };
