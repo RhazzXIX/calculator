@@ -115,7 +115,7 @@ button.keys:active{
     transform: translateY(4px);
 }
 
-.keys.active{
+button.keys.active{
     box-shadow: 0 5px rgb(122, 122, 122);
     transform: translateY(4px);
 }

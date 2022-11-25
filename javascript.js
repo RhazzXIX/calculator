@@ -89,27 +89,31 @@ function divide () {
 }
 
 function operate () {
-    if(digits1[0] === undefined) {
-        digits1 = result.toString().split('');
-    };
-    if(addition === true) add();
-    if(subtraction === true) subtract();
-    if(multiplication === true) multiply();
-    if(quotient === true) {
-        if(digits2.join(``) == 0) {
-            alert(`To Infinity and Beyond!!!\nCan't divide by zero!`);
-        } else if(digits2.join(``) !== 0) {
-            divide();
+    if (calculate === false) {
+        showDigits();
+    } else { 
+        if(digits1[0] === undefined) {
+            digits1 = result.toString().split('');
         };
+        if(addition === true) add();
+        if(subtraction === true) subtract();
+        if(multiplication === true) multiply();
+        if(quotient === true) {
+            if(digits2.join(``) == 0) {
+                alert(`To Infinity and Beyond!!!\nCan't divide by zero!`);
+            } else if(digits2.join(``) !== 0) {
+                divide();
+            };
+        };
+        screen.textContent = `${result}`;
+        digits1.splice(0, 13);
+        digits2.splice(0, 13);
+        addition = false;
+        subtraction = false;
+        multiplication = false;
+        quotient = false;
+        nextDigit = false;
     };
-    screen.textContent = `${result}`;
-    digits1.splice(0, 13);
-    digits2.splice(0, 13);
-    addition = false;
-    subtraction = false;
-    multiplication = false;
-    quotient = false;
-    nextDigit = false;
 }
 
 function toggleSign() {
@@ -140,7 +144,6 @@ function toggleSign() {
 }
 
 function inputDigit(num) {
-    calculate = true;
     if(nextDigit === false) {
         if(digits1.length < 13) {
             switch (num) {
@@ -154,7 +157,7 @@ function inputDigit(num) {
                         };
                     };    
                     break;
-                case 0:
+                case 0 || '0':
                     if(digits1.join('').includes('.') === true) {
                         digits1.push(num)
                     } else if(digits1[0] !== 0){
@@ -170,6 +173,7 @@ function inputDigit(num) {
             };
         };
     } else if (nextDigit === true) {
+        calculate = true;
         if(digits2.length < 13) {
             switch (num) {
                 case '.':
@@ -204,8 +208,14 @@ function inputDigit(num) {
 back.addEventListener('click', (e) => {
     if(nextDigit === false) {
         digits1.pop();
+        if(digits1.length === 0){
+            digits1.push(0);
+        }
     } else {
         digits2.pop();
+        if(digits2.length === 0){
+            digits2.push(0);
+        };
     };
     showDigits();
 });
@@ -234,7 +244,7 @@ dot.addEventListener('click', (e) => {
     showDigits();
 });
 
-zero.addEventListener('click', (e) => {
+zero.addEventListener('click', (e) => {10
     inputDigit(0);
     e.stopPropagation();
 });
@@ -282,86 +292,70 @@ equals.addEventListener('click', (e) => {
         operate();
         calculate = false;
     };
-    e.stopPropagation();
 });
 
 plus.addEventListener('click', (e) => {
-    if(calculate === false) {
+    if(nextDigit === false){
         showDigits();
-    } else {
-        addition = true;
-        subtraction = false;
-        multiplication = false;
-        quotient = false;
-        if(nextDigit === false){
-            showDigits();
-            nextDigit = true;
-        } else if (nextDigit === true) {
-            operate();
-            screen.textContent = `${result}`;
-            digits1.push(result);
-        }; 
-    };
+    } else if (nextDigit === true) {
+        operate();
+        screen.textContent = `${result}`;
+        digits1.push(result);
+    }; 
+    nextDigit = true; 
+    addition = true;
+    subtraction = false;
+    multiplication = false;
+    quotient = false;
     e.stopPropagation(); 
 });
 
 minus.addEventListener('click', (e) => {
-    if(calculate === false) {
+    if(nextDigit === false) {
         showDigits();
-    } else {
-        subtraction = true;
-        addition = false;
-        multiplication = false;
-        quotient = false;
-        if(nextDigit === false) {
-            showDigits();
-            nextDigit = true;
-        } else if (nextDigit === true) {
-            operate();
-            screen.textContent = `${result}`;
-            digits1.push(result);
-        };
+    } else if (nextDigit === true) {
+        operate();
+        screen.textContent = `${result}`;
+        digits1.push(result);
     };
+    nextDigit = true; 
+    subtraction = true;
+    addition = false;
+    multiplication = false;
+    quotient = false;
+    
     e.stopPropagation();
 });
 
 times.addEventListener('click', (e) => {
-    if(calculate === false) {
+    if(nextDigit === false) {
         showDigits();
-    } else {
-        multiplication = true;
-        addition = false;
-        subtraction = false;
-        quotient = false;
-        if(nextDigit === false) {
-            showDigits();
-            nextDigit = true;
-        } else if (nextDigit === true) {
-            operate();
-            screen.textContent = `${result}`;
-            digits1.push(result);
-        };
+    } else if (nextDigit === true) {
+        operate();
+        screen.textContent = `${result}`;
+        digits1.push(result);
     };
+    nextDigit = true; 
+    multiplication = true;
+    addition = false;
+    subtraction = false;
+    quotient = false;
     e.stopPropagation();
 });
 
 division.addEventListener('click', (e) => {
-    if(calculate === false) {
+    if(nextDigit === false) {
         showDigits();
-    } else {
-        quotient = true;
-        addition = false;
-        subtraction = false;
-        multiplication = false;
-        if(nextDigit === false) {
-            showDigits();
-            nextDigit = true;
-        } else if (nextDigit === true) {
-            operate();
-            screen.textContent = `${result}`;
-            digits1.push(result);        
-        };
-    }
+    } else if (nextDigit === true) {
+        operate();
+        screen.textContent = `${result}`;
+        digits1.push(result);   
+    };
+    nextDigit = true; 
+    quotient = true;
+    addition = false;
+    subtraction = false;
+    multiplication = false;
     e.stopPropagation();
 });
 
@@ -406,11 +400,114 @@ equals.addEventListener('mouseup', (e) => {
     e.stopPropagation();
 });
 
-// test keydown##########
-// const body = document.querySelector(`body`);
-// body.addEventListener('keydown', (e) => {
-//     equals.classList.toggle(`active`);
-// });
-// body.addEventListener('keyup', (e) => {
-//     equals.classList.toggle(`active`);
-// });
+ // test keydown##########
+window.addEventListener('keydown', (e) => {
+    const button = document.querySelector(`button[data-key='${e.keyCode}']`)
+    if(!button) return;
+    button.classList.toggle(`active`);
+    switch (e.key) {
+        case '0':
+            inputDigit(Number(e.key));
+            break;
+        case '/':
+            if(calculate === false) {
+                showDigits();
+            } else {
+                if(nextDigit === false) {
+                    showDigits();
+                } else if (nextDigit === true) {
+                    operate();
+                    screen.textContent = `${result}`;
+                    digits1.push(result);        
+                };
+                nextDigit = true;
+                quotient = true;
+                addition = false;
+                subtraction = false;
+                multiplication = false;
+            };
+            break;
+        case '*':
+            if(calculate === false) {
+                showDigits();
+            } else {
+                if(nextDigit === false) {
+                    showDigits();
+                } else if (nextDigit === true) {
+                    operate();
+                    screen.textContent = `${result}`;
+                    digits1.push(result);
+                };
+                nextDigit = true; 
+                multiplication = true;
+                addition = false;
+                subtraction = false;
+                quotient = false;
+            };
+            break;
+        case '-':
+            if(calculate === false) {
+                showDigits();
+            } else {
+                if(nextDigit === false) {
+                    showDigits();
+                } else if (nextDigit === true) {
+                    operate();
+                    screen.textContent = `${result}`;
+                    digits1.push(result);
+                };
+                nextDigit = true;
+                subtraction = true;
+                addition = false;
+                multiplication = false;
+                quotient = false;
+            };
+            break;
+        case '+':
+            if(calculate === false) {10
+                showDigits();
+            } else {
+                if(nextDigit === false){
+                    showDigits();
+                } else if (nextDigit === true) {
+                    operate();
+                    screen.textContent = `${result}`;
+                    digits1.push(result);
+                }; 
+                nextDigit = true;
+                addition = true;
+                subtraction = false;
+                multiplication = false;
+                quotient = false;
+            };
+            break;
+        case 'Enter':
+            if(calculate === false) {
+                showDigits();
+            } else if (calculate === true) {
+                operate();
+            };
+            break;
+        case 'Backspace':
+            if(nextDigit === false) {
+                digits1.pop();
+                if(digits1.length === 0){
+                    digits1.push(0);
+                }
+            } else {
+                digits2.pop();
+                if(digits2.length === 0){
+                    digits2.push(0);
+                };
+            };
+            showDigits();
+            break;
+        default:
+            inputDigit(e.key);
+    }
+});
+window.addEventListener('keyup', (e) => {
+    const button = document.querySelector(`button[data-key='${e.keyCode}']`)
+    if(!button ) return;
+    button.classList.toggle(`active`);
+});
