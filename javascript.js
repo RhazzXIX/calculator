@@ -323,7 +323,6 @@ minus.addEventListener('click', (e) => {
     addition = false;
     multiplication = false;
     quotient = false;
-    
     e.stopPropagation();
 });
 
@@ -410,76 +409,60 @@ window.addEventListener('keydown', (e) => {
             inputDigit(Number(e.key));
             break;
         case '/':
-            if(calculate === false) {
+            if(nextDigit === false) {
                 showDigits();
-            } else {
-                if(nextDigit === false) {
-                    showDigits();
-                } else if (nextDigit === true) {
-                    operate();
-                    screen.textContent = `${result}`;
-                    digits1.push(result);        
-                };
-                nextDigit = true;
-                quotient = true;
-                addition = false;
-                subtraction = false;
-                multiplication = false;
+            } else if (nextDigit === true) {
+                operate();
+                screen.textContent = `${result}`;
+                digits1.push(result);   
             };
+            nextDigit = true; 
+            quotient = true;
+            addition = false;
+            subtraction = false;
+            multiplication = false;
             break;
         case '*':
-            if(calculate === false) {
+            if(nextDigit === false) {
                 showDigits();
-            } else {
-                if(nextDigit === false) {
-                    showDigits();
-                } else if (nextDigit === true) {
-                    operate();
-                    screen.textContent = `${result}`;
-                    digits1.push(result);
-                };
-                nextDigit = true; 
-                multiplication = true;
-                addition = false;
-                subtraction = false;
-                quotient = false;
+            } else if (nextDigit === true) {
+                operate();
+                screen.textContent = `${result}`;
+                digits1.push(result);
             };
+            nextDigit = true; 
+            multiplication = true;
+            addition = false;
+            subtraction = false;
+            quotient = false;
             break;
         case '-':
-            if(calculate === false) {
+            if(nextDigit === false) {
                 showDigits();
-            } else {
-                if(nextDigit === false) {
-                    showDigits();
-                } else if (nextDigit === true) {
-                    operate();
-                    screen.textContent = `${result}`;
-                    digits1.push(result);
-                };
-                nextDigit = true;
-                subtraction = true;
-                addition = false;
-                multiplication = false;
-                quotient = false;
+            } else if (nextDigit === true) {
+                operate();
+                screen.textContent = `${result}`;
+                digits1.push(result);
             };
+            nextDigit = true; 
+            subtraction = true;
+            addition = false;
+            multiplication = false;
+            quotient = false;
             break;
         case '+':
-            if(calculate === false) {10
+            if(nextDigit === false){
                 showDigits();
-            } else {
-                if(nextDigit === false){
-                    showDigits();
-                } else if (nextDigit === true) {
-                    operate();
-                    screen.textContent = `${result}`;
-                    digits1.push(result);
-                }; 
-                nextDigit = true;
-                addition = true;
-                subtraction = false;
-                multiplication = false;
-                quotient = false;
-            };
+            } else if (nextDigit === true) {
+                operate();
+                screen.textContent = `${result}`;
+                digits1.push(result);
+            }; 
+            nextDigit = true; 
+            addition = true;
+            subtraction = false;
+            multiplication = false;
+            quotient = false;
             break;
         case 'Enter':
             if(calculate === false) {
