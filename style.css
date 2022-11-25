@@ -87,6 +87,12 @@ body {
     flex-wrap: wrap;
 }
 
+button.keys.operator{
+    box-shadow: 0 9px rgb(172, 172, 172);
+    color:yellow;
+    background-color: black;
+}
+
 button.keys {
     font-size: 50px;
     text-align: center;
@@ -97,6 +103,11 @@ button.keys {
     margin: 10px;
     background-color: rgb(245, 245, 245);
     box-shadow: 0 9px rgb(172, 172, 172);
+}
+
+button.keys.operator:active{
+    box-shadow: 0 5px rgb(49, 59, 43);
+    transform: translateY(4px);
 }
 
 button.keys:active{
@@ -112,6 +123,7 @@ button.keys:active{
 button#equals {
     width: 215px;
 }
+
 
 button#back {
     padding-bottom: 14px;

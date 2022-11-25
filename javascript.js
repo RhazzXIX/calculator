@@ -95,7 +95,13 @@ function operate () {
     if(addition === true) add();
     if(subtraction === true) subtract();
     if(multiplication === true) multiply();
-    if(quotient === true) divide();
+    if(quotient === true) {
+        if(digits2.join(``) == 0) {
+            alert(`To Infinity and Beyond!!!\nCan't divide by zero!`);
+        } else if(digits2.join(``) !== 0) {
+            divide();
+        };
+    };
     screen.textContent = `${result}`;
     digits1.splice(0, 13);
     digits2.splice(0, 13);
