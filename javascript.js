@@ -108,7 +108,10 @@ function operate () {
 
 function toggleSign() {
     if(nextDigit === false) {
-        if(digits1.length > 0) {
+        if(Number(digits1.join('')) === 0) {
+            digits1.splice(0, 13);
+            inputDigit(0);
+        } else {
             if(digits1[0] !== '-') {
                 digits1.unshift('-');
             } else if (digits1[0] === '-') {
@@ -116,7 +119,10 @@ function toggleSign() {
             };
         };
     } else {
-        if(digits2.length > 0) {
+        if(Number(digits2.join('')) === 0) {
+            digits1.splice(0, 13);
+            inputDigit(0);
+        } else {
             if(digits2[0] !== '-') {
                 digits2.unshift('-');
             } else if (digits1[0] === '-') {
@@ -176,7 +182,7 @@ function inputDigit(num) {
                     };
                     break;
                 default:
-                    if(digits2[0] === 0 && digits1.join('').includes('.') === false){
+                    if(digits2[0] === 0 && digits2.join('').includes('.') === false){
                         digits2.shift();
                         digits2.push(num);
                     } else {digits2.push(num)};
