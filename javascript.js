@@ -117,6 +117,7 @@ function toggleSign() {
         if(Number(digits1.join('')) === 0) {
             digits1.splice(0, 13);
             inputDigit(0);
+            calculate = false;
         } else {
             if(digits1[0] !== '-') {
                 digits1.unshift('-');
@@ -139,6 +140,7 @@ function toggleSign() {
 }
 
 function inputDigit(num) {
+    calculate = true;
     if(nextDigit === false) {
         if(digits1.length < 13) {
             switch (num) {
@@ -284,70 +286,82 @@ equals.addEventListener('click', (e) => {
 });
 
 plus.addEventListener('click', (e) => {
-    calculate = true;
-    addition = true;
-    subtraction = false;
-    multiplication = false;
-    quotient = false;
-    if(nextDigit === false){
+    if(calculate === false) {
         showDigits();
-        nextDigit = true;
-    } else if (nextDigit === true) {
-        operate();
-        screen.textContent = `${result}`;
-        digits1.push(result);
-    };       
+    } else {
+        addition = true;
+        subtraction = false;
+        multiplication = false;
+        quotient = false;
+        if(nextDigit === false){
+            showDigits();
+            nextDigit = true;
+        } else if (nextDigit === true) {
+            operate();
+            screen.textContent = `${result}`;
+            digits1.push(result);
+        }; 
+    };
     e.stopPropagation(); 
 });
 
 minus.addEventListener('click', (e) => {
-    calculate = true;
-    subtraction = true;
-    addition = false;
-    multiplication = false;
-    quotient = false;
-    if(nextDigit === false) {
+    if(calculate === false) {
         showDigits();
-        nextDigit = true;
-    } else if (nextDigit === true) {
-        operate();
-        screen.textContent = `${result}`;
-        digits1.push(result);
+    } else {
+        subtraction = true;
+        addition = false;
+        multiplication = false;
+        quotient = false;
+        if(nextDigit === false) {
+            showDigits();
+            nextDigit = true;
+        } else if (nextDigit === true) {
+            operate();
+            screen.textContent = `${result}`;
+            digits1.push(result);
+        };
     };
     e.stopPropagation();
 });
 
 times.addEventListener('click', (e) => {
-    calculate = true;
-    multiplication = true;
-    addition = false;
-    subtraction = false;
-    quotient = false;
-    if(nextDigit === false) {
+    if(calculate === false) {
         showDigits();
-        nextDigit = true;
-    } else if (nextDigit === true) {
-        operate();
-        screen.textContent = `${result}`;
-        digits1.push(result);
+    } else {
+        multiplication = true;
+        addition = false;
+        subtraction = false;
+        quotient = false;
+        if(nextDigit === false) {
+            showDigits();
+            nextDigit = true;
+        } else if (nextDigit === true) {
+            operate();
+            screen.textContent = `${result}`;
+            digits1.push(result);
+        };
     };
     e.stopPropagation();
 });
 
 division.addEventListener('click', (e) => {
-    calculate = true;
-    quotient = true;
-    addition = false;
-    subtraction = false;
-    multiplication = false;
-    if(nextDigit === false) {
+    if(calculate === false) {
         showDigits();
-        nextDigit = true;
-    } else if (nextDigit === true) {
-        operate();
-        screen.textContent = `${result}`;
-        digits1.push(result);        
-    };
+    } else {
+        quotient = true;
+        addition = false;
+        subtraction = false;
+        multiplication = false;
+        if(nextDigit === false) {
+            showDigits();
+            nextDigit = true;
+        } else if (nextDigit === true) {
+            operate();
+            screen.textContent = `${result}`;
+            digits1.push(result);        
+        };
+    }
     e.stopPropagation();
 });
 
