@@ -104,9 +104,9 @@ button.keys:active{
     transform: translateY(4px);
 }
 
-.active{
+.keys.active{
     box-shadow: 0 5px rgb(122, 122, 122);
-    
+    transform: translateY(4px);
 }
 
 button#equals {

@@ -1,7 +1,6 @@
-//anchor the screen display text content
+
 const screen = document.querySelector('#screen');
 
-//anchor buttons
 const back = document.querySelector('#back');
 const sign = document.querySelector('#signed');
 const gClear = document.querySelector('#gClear');
@@ -22,12 +21,12 @@ const dot = document.querySelector(`#dot`);
 const equals = document.querySelector(`#equals`);
 const plus = document.querySelector(`#plus`);
 
-// array that will be displayed in the screen
+
 let digits1 = [];
 let digits2 = [];
 let result = 0;
 
-//boolean variables to for calculator flow
+
 let nextDigit = false;
 let addition = false;
 let subtraction = false;
@@ -37,7 +36,6 @@ let signed = false;
 let calculate = false;
 
 
-//function that shows the array in the screen
 function showDigits() {
     if(nextDigit === false) {
         if(digits1.length == 0) {
@@ -53,150 +51,6 @@ function showDigits() {
         };
     };
 }
-
-//show button input at the display
-back.addEventListener('click', (e) => {
-    if(nextDigit === false) {
-        digits1.pop();
-    } else {
-        digits2.pop();
-    };
-    showDigits();
-});
-sign.addEventListener('click', (e) => {
-    toggleSign();
-    showDigits();
-});
-
-function toggleSign() {
-    if(nextDigit === false) {
-        if(digits1.length > 0) {
-            if(digits1[0] !== '-') {
-                digits1.unshift('-');
-            } else if (digits1[0] === '-') {
-                digits1.shift('-');
-            };
-        };
-    } else {
-        if(digits2.length > 0) {
-            if(digits2[0] !== '-') {
-                digits2.unshift('-');
-            } else if (digits1[0] === '-') {
-                digits2.shift('-');
-            };
-        };
-    };
-}
-
-gClear.addEventListener('click', (e) => {
-    result = 0;
-    screen.textContent = `${result}`;
-    digits1.splice(0, 13);
-    digits2.splice(0, 13);
-    addition = false;
-    quotient = false;
-    subtraction = false;
-    multiplication = false;
-    nextDigit = false;
-    calculate = false;
-    e.stopPropagation();
-});
-
-dot.addEventListener('click', (e) => {
-    if(nextDigit === false) {
-        if(digits1.join('').includes('.') === false) {
-            if(digits1.length === 0) {
-                inputDigit(0);
-                inputDigit('.');
-            } else {
-                inputDigit('.');
-            };
-            
-        };
-    } else if (nextDigit === true) {
-        if(digits2.join('').includes('.') === false) {
-            if(digits2.length === 0) {
-                inputDigit(0);
-                inputDigit('.');
-            } else {
-                inputDigit('.');
-            };
-        };
-    };
-    showDigits();
-});
-
-function inputDigit(num) {
-    if(nextDigit === false) {
-        if(digits1.length < 13) {
-            digits1.push(num);
-        };
-    } else if (nextDigit === true) {
-        if(digits2.length < 13) {
-            digits2.push(num);
-        };
-    }
-    showDigits();
-}
-
-zero.addEventListener('click', (e) => {
-    if(digits1.length > 0) inputDigit(0);
-});
-one.addEventListener('click', (e) => {
-    inputDigit(1);
-});
-two.addEventListener('click', (e) => {
-    inputDigit(2);
-});
-three.addEventListener('click', (e) => {
-    inputDigit(3);
-});
-four.addEventListener('click', (e) => {
-    inputDigit(4);
-});
-five.addEventListener('click', (e) => {
-    inputDigit(5);
-})
-six.addEventListener('click', (e) => {
-    inputDigit(6);
-});
-seven.addEventListener('click', (e) => {
-    inputDigit(7);
-});
-eight.addEventListener('click', (e) => {
-    inputDigit(8);;
-});
-nine.addEventListener('click', (e) => {
-    inputDigit(9);
-});
-
-equals.addEventListener('click', (e) => {
-    if(calculate === false) {
-        showDigits();
-    } else if (calculate === true) {
-        operate();
-        calculate = false;
-    };
-});
-
-function operate () {
-    if(digits1[0] === undefined) {
-        digits1.push(result);
-    };
-    if(addition === true) add();
-    if(subtraction === true) subtract();
-    if(multiplication === true) multiply();
-    if(quotient === true) divide();
-    screen.textContent = `${result}`;
-    digits1.splice(0, 13);
-    digits2.splice(0, 13);
-    addition = false;
-    subtraction = false;
-    multiplication = false;
-    quotient = false;
-    nextDigit = false;
-}
-
 function add() {
     let numA = digits1.join(``);
     let numB = digits2.join(``);
@@ -234,6 +88,189 @@ function divide () {
     };
 }
 
+function operate () {
+    if(digits1[0] === undefined) {
+        digits1 = result.toString().split('');
+    };
+    if(addition === true) add();
+    if(subtraction === true) subtract();
+    if(multiplication === true) multiply();
+    if(quotient === true) divide();
+    screen.textContent = `${result}`;
+    digits1.splice(0, 13);
+    digits2.splice(0, 13);
+    addition = false;
+    subtraction = false;
+    multiplication = false;
+    quotient = false;
+    nextDigit = false;
+}
+
+function toggleSign() {
+    if(nextDigit === false) {
+        if(digits1.length > 0) {
+            if(digits1[0] !== '-') {
+                digits1.unshift('-');
+            } else if (digits1[0] === '-') {
+                digits1.shift('-');
+            };
+        };
+    } else {
+        if(digits2.length > 0) {
+            if(digits2[0] !== '-') {
+                digits2.unshift('-');
+            } else if (digits1[0] === '-') {
+                digits2.shift('-');
+            };
+        };
+    };
+}
+
+function inputDigit(num) {
+    if(nextDigit === false) {
+        if(digits1.length < 13) {
+            switch (num) {
+                case '.':
+                    if(digits1.join('').includes('.') === false) {
+                        if(digits1.length === 0) {
+                            digits1.push(0);
+                            digits1.push(num);
+                        } else {
+                            digits1.push(num);
+                        };
+                    };    
+                    break;
+                case 0:
+                    if(digits1.join('').includes('.') === true) {
+                        digits1.push(num)
+                    } else if(digits1[0] !== 0){
+                        digits1.push(num)
+                    };
+                    break;
+                default:
+                    if(digits1[0] === 0 && digits1.join('').includes('.') === false){
+                        digits1.shift();
+                        digits1.push(num);
+                    } else {digits1.push(num)};
+                    break;
+            };
+        };
+    } else if (nextDigit === true) {
+        if(digits2.length < 13) {
+            switch (num) {
+                case '.':
+                    if(digits2.join('').includes('.') === false) {
+                        if(digits2.length === 0) {
+                            digits2.push(0);
+                            digits2.push(num);
+                        } else {
+                            digits2.push(num);
+                        };
+                    };    
+                    break;
+                case 0:
+                    if(digits2.join('').includes('.') === true) {
+                        digits2.push(num)
+                    } else if(digits2[0] !== 0){
+                        digits2.push(num)
+                    };
+                    break;
+                default:
+                    if(digits2[0] === 0 && digits1.join('').includes('.') === false){
+                        digits2.shift();
+                        digits2.push(num);
+                    } else {digits2.push(num)};
+                    break;
+            };
+        };
+    }
+    showDigits();
+}
+
+back.addEventListener('click', (e) => {
+    if(nextDigit === false) {
+        digits1.pop();
+    } else {
+        digits2.pop();
+    };
+    showDigits();
+});
+
+sign.addEventListener('click', (e) => {
+    toggleSign();
+    showDigits();
+});
+
+gClear.addEventListener('click', (e) => {
+    result = 0;
+    screen.textContent = `${result}`;
+    digits1.splice(0, 13);
+    digits2.splice(0, 13);
+    addition = false;
+    quotient = false;
+    subtraction = false;
+    multiplication = false;
+    nextDigit = false;
+    calculate = false;
+    e.stopPropagation();
+});
+
+dot.addEventListener('click', (e) => {
+    inputDigit('.');
+    showDigits();
+});
+
+zero.addEventListener('click', (e) => {
+    inputDigit(0);
+    e.stopPropagation();
+});
+one.addEventListener('click', (e) => {
+    inputDigit(1);
+    e.stopPropagation();
+});
+two.addEventListener('click', (e) => {
+    inputDigit(2);
+    e.stopPropagation();
+});
+three.addEventListener('click', (e) => {
+    inputDigit(3);
+    e.stopPropagation();
+});
+four.addEventListener('click', (e) => {
+    inputDigit(4);
+    e.stopPropagation();
+});
+five.addEventListener('click', (e) => {
+    inputDigit(5);
+    e.stopPropagation();
+})
+six.addEventListener('click', (e) => {
+    inputDigit(6);
+    e.stopPropagation();
+});
+seven.addEventListener('click', (e) => {
+    inputDigit(7);
+    e.stopPropagation();
+});
+eight.addEventListener('click', (e) => {
+    inputDigit(8);
+    e.stopPropagation();
+});
+nine.addEventListener('click', (e) => {
+    inputDigit(9);
+    e.stopPropagation();
+});
+
+equals.addEventListener('click', (e) => {
+    if(calculate === false) {
+        showDigits();
+    } else if (calculate === true) {
+        operate();
+        calculate = false;
+    };
+    e.stopPropagation();
+});
+
 plus.addEventListener('click', (e) => {
     calculate = true;
     addition = true;
@@ -247,7 +284,8 @@ plus.addEventListener('click', (e) => {
         operate();
         screen.textContent = `${result}`;
         digits1.push(result);
-    };        
+    };       
+    e.stopPropagation(); 
 });
 
 minus.addEventListener('click', (e) => {
@@ -264,6 +302,7 @@ minus.addEventListener('click', (e) => {
         screen.textContent = `${result}`;
         digits1.push(result);
     };
+    e.stopPropagation();
 });
 
 times.addEventListener('click', (e) => {
@@ -280,6 +319,7 @@ times.addEventListener('click', (e) => {
         screen.textContent = `${result}`;
         digits1.push(result);
     };
+    e.stopPropagation();
 });
 
 division.addEventListener('click', (e) => {
@@ -296,9 +336,9 @@ division.addEventListener('click', (e) => {
         screen.textContent = `${result}`;
         digits1.push(result);        
     };
+    e.stopPropagation();
 });
 
-//flash the screen when pressing the operation signs
 division.addEventListener('mousedown', (e) => {
     screen.style.color = 'rgb(221, 221, 221)';
     e.stopPropagation();
