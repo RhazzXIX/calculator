@@ -22,8 +22,8 @@ const equals = document.querySelector(`#equals`);
 const plus = document.querySelector(`#plus`);
 
 
-let digits1 = [];
-let digits2 = [];
+let digits1 = [0];
+let digits2 = [0];
 let result = 0;
 
 
@@ -52,15 +52,27 @@ function showDigits() {
     };
 }
 function add() {
+    let sum
     let numA = digits1.join(``);
     let numB = digits2.join(``);
-    result = Number(numA) + Number(numB);
+    sum = Number(numA) + Number(numB);
+    if(sum.toString().length > 13) {
+        result = sum.toPrecision(8);
+    } else {
+        result = sum
+    }
 }
 
 function subtract() {
+    let difference
     let numA = digits1.join(``);
     let numB = digits2.join(``);
-    result = Number(numA) - Number(numB);
+    difference = Number(numA) - Number(numB);
+    if(difference.toString().length > 13) {
+        result = difference.toPrecision(8);
+    } else {
+        result = difference;
+    };
 }
 
 function multiply() {
@@ -82,7 +94,7 @@ function divide () {
     let numB = digits2.join(``);
     quotient = Number(numA) / Number(numB);
     if(quotient.toString().length > 13) {
-        result = quotient.toPrecision(10);
+        result = quotient.toPrecision(8);
     } else {
         result = quotient;
     };
@@ -461,6 +473,7 @@ window.addEventListener('keydown', (e) => {
                 showDigits();
             } else if (calculate === true) {
                 operate();
+                calculate = false;
             };
             break;
         case 'Backspace':
